@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
   if (comando) {
     navigator.clipboard.writeText(comando)
       .then(function() {
-        window.close();
+        alert('¡El comando ha sido copiado al portapapeles!');
+        closeWindow();
       })
       .catch(function(error) {
         document.getElementById('comandoACopiar').textContent = comando;
@@ -57,11 +58,15 @@ function copiarComando() {
     .then(function() {
       alert('¡El comando ha sido copiado al portapapeles!');
       $('#modalCopiarComando').modal('hide');
-      window.close();
+      closeWindow();
     })
     .catch(function(error) {
       console.error('Error al copiar el comando: ', error);
     });
+}
+const closeWindow = () => {
+ window.open(location.href, "_self", "");
+ window.close()
 }
 </script>
 
