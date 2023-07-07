@@ -1,33 +1,33 @@
-<!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
+    body {
+      background-color: #353740;
+    }
+    
     .modal-content {
-      background: linear-gradient(180deg, rgba(53, 55, 64, 0), #353740 58.85%);
+      background-color: #4c4e5d;
+    }
+    
+    #comandoACopiar {
+      font-family: 'Courier New', Courier, monospace;
+      color: #ffffff;
     }
   </style>
 </head>
 <body>
-
-<!-- Aquí va el contenido de tu página -->
-
-<!-- Modal -->
 <div id="modalCopiarComando" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalCopiarComandoLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalCopiarComandoLabel">Comando para copiar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="modal-body">
         <p id="comandoACopiar"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="copiarComando()">Copiar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="copiarComando()">Copiar y Cerrar</button>
       </div>
     </div>
   </div>
@@ -37,15 +37,12 @@
 document.addEventListener('DOMContentLoaded', function() {
   var urlParams = new URLSearchParams(window.location.search);
   var comando = urlParams.get('comando');
-
   if (comando) {
     navigator.clipboard.writeText(comando)
       .then(function() {
-        alert('¡El comando ha sido copiado al portapapeles!');
         window.close();
       })
       .catch(function(error) {
-        // Mostrar el modal con el comando
         document.getElementById('comandoACopiar').textContent = comando;
         $('#modalCopiarComando').modal('show');
       });
